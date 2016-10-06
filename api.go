@@ -57,7 +57,6 @@ func Init() error {
 	tios.Iflag &^= syscall_IGNBRK | syscall_BRKINT | syscall_PARMRK |
 		syscall_ISTRIP | syscall_INLCR | syscall_IGNCR |
 		syscall_ICRNL | syscall_IXON
-	tios.Oflag &^= syscall_OPOST
 	tios.Lflag &^= syscall_ECHO | syscall_ECHONL | syscall_ICANON |
 		syscall_ISIG | syscall_IEXTEN
 	tios.Cflag &^= syscall_CSIZE | syscall_PARENB
@@ -372,7 +371,7 @@ func Clear(fg, bg Attribute) error {
 // any known sequence. ESC enables ModAlt modifier for the next keyboard event.
 //
 // Both input modes can be OR'ed with Mouse mode. Setting Mouse mode bit up will
-// enable mouse button click events.
+// enable mouse button press/release and drag events.
 //
 // If 'mode' is InputCurrent, returns the current input mode. See also Input*
 // constants.
